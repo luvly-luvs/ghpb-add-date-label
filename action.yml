@@ -8,12 +8,6 @@ inputs:
   installationId:
     required: true
     description: 'Github App InstallationId'
-  clientId:
-    required: true
-    description: 'Client ID'
-  clientSecret:
-    required: true
-    description: 'Client Secret'
   privateKey:
     required: true
     description: 'Github App Private Key'

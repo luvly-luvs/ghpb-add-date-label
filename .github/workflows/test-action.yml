@@ -13,8 +13,6 @@ jobs:
         with:
           appId: ${{ secrets.DATE_LABEL_APPID }}
           installationId: ${{ secrets.DATE_LABEL_INSTALLID }}
-          clientId: ${{ secrets.DATE_LABEL_CLIENTID }}
-          clientSecret: ${{ secrets.DATE_LABEL_CLIENT_SECRET }}
           privateKey: ${{ secrets.DATE_LABEL_PRIVATE_KEY }}
           projectId: 1
           fieldName: 'SomeField'

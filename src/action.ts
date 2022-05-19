@@ -1,13 +1,10 @@
 import { info, setFailed } from '@actions/core';
-import { getOctokit } from '@actions/github';
-import { createAppAuth } from '@octokit/auth-app';
-import { ProjectFieldsQueryResult } from './types';
+//import { ProjectFieldsQueryResult } from './types';
+import { getAuthenticatedOctokit } from './utils';
 
 export type ActionArgs = Record<string, string> & {
   appId: string;
   installationId: string;
-  clientId: string;
-  clientSecret: string;
   privateKey: string;
   projectId: string;
   fieldName: string;
@@ -26,15 +23,26 @@ const action = async (args: ActionArgs) => {
     }
 
     const { projectId, fieldName, ...authArgs } = args;
-    const auth = createAppAuth(authArgs);
-    const token = await auth({
-      type: 'installation',
-      installationId: authArgs.installationId,
-    });
-    info(JSON.stringify(token));
-    const octo = getOctokit(token?.token || '');
+    const { graphql } = getAuthenticatedOctokit(authArgs);
 
-    const projectFields = await octo.graphql<ProjectFieldsQueryResult>({
+    info(
+      JSON.stringify(
+        await graphql({
+          query: `query {
+            organization(login: luvly-luvs) {
+              projectsNext(first: 20) {
+                nodes {
+                  id
+                  title
+                }
+              }
+            }
+          }`,
+        })
+      )
+    );
+
+    /*const projectFields = await graphql<ProjectFieldsQueryResult>({
       query: `query getProjectFields($projectId: ID!) {
         node(id: $projectId) {
           ... on ProjectNext {
@@ -51,7 +59,7 @@ const action = async (args: ActionArgs) => {
       projectId,
     });
 
-    info(JSON.stringify(projectFields));
+    info(JSON.stringify(projectFields));*/
   } catch (e: any) {
     setFailed(e?.message || e);
   }
