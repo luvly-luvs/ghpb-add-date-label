@@ -48,7 +48,7 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
             type: 'installation',
             installationId: authArgs.installationId,
         });
-        (0, core_1.debug)(JSON.stringify(token));
+        (0, core_1.info)(JSON.stringify(token));
         const octo = (0, utils_1.getAuthenticatedOctokit)(authArgs);
         const projectFields = yield octo.graphql({
             query: `query getProjectFields($projectId: ID!) {
@@ -66,7 +66,7 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
       }`,
             projectId,
         });
-        (0, core_1.debug)(JSON.stringify(projectFields));
+        (0, core_1.info)(JSON.stringify(projectFields));
     }
     catch (e) {
         (0, core_1.setFailed)((e === null || e === void 0 ? void 0 : e.message) || e);

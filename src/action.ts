@@ -1,4 +1,4 @@
-import { debug, setFailed } from '@actions/core';
+import { info, setFailed } from '@actions/core';
 import { createAppAuth } from '@octokit/auth-app';
 import { ProjectFieldsQueryResult } from './types';
 import { getAuthenticatedOctokit } from './utils';
@@ -31,7 +31,7 @@ const action = async (args: ActionArgs) => {
       type: 'installation',
       installationId: authArgs.installationId,
     });
-    debug(JSON.stringify(token));
+    info(JSON.stringify(token));
     const octo = getAuthenticatedOctokit(authArgs);
 
     const projectFields = await octo.graphql<ProjectFieldsQueryResult>({
@@ -51,7 +51,7 @@ const action = async (args: ActionArgs) => {
       projectId,
     });
 
-    debug(JSON.stringify(projectFields));
+    info(JSON.stringify(projectFields));
   } catch (e: any) {
     setFailed(e?.message || e);
   }
