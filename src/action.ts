@@ -23,9 +23,11 @@ const action = async (args: ActionArgs) => {
     }
 
     const { projectId, fieldName, ...authArgs } = args;
-    const { graphql } = getAuthenticatedOctokit(authArgs);
+    const octo = getAuthenticatedOctokit(authArgs);
 
-    const projectFields = await graphql<ProjectFieldsQueryResult>({
+    console.log(octo);
+
+    const projectFields = await octo.graphql<ProjectFieldsQueryResult>({
       query: `query getProjectFields($projectId: ID!) {
         node(id: $projectId) {
           ... on ProjectNext {
