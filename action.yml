@@ -1,0 +1,13 @@
+name: 'action-template-typescript'
+description: 'Github Actions Typescript Template'
+author: 'luvly-luvs'
+inputs:
+  token:
+    required: true
+    description: 'Github App Token'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+branding:
+    icon: 'alert-circle'
+    color: 'red'
