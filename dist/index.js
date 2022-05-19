@@ -55,6 +55,9 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
               }
             }
           }`,
+            headers: {
+                'GraphQL-Features': 'projects_next_graphql',
+            },
         })));
         /*const projectFields = await graphql<ProjectFieldsQueryResult>({
           query: `query getProjectFields($projectId: ID!) {

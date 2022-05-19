@@ -38,6 +38,9 @@ const action = async (args: ActionArgs) => {
               }
             }
           }`,
+          headers: {
+            'GraphQL-Features': 'projects_next_graphql',
+          },
         })
       )
     );
