@@ -1,7 +1,7 @@
 import { info, setFailed } from '@actions/core';
+import { getOctokit } from '@actions/github';
 import { createAppAuth } from '@octokit/auth-app';
 import { ProjectFieldsQueryResult } from './types';
-import { getAuthenticatedOctokit } from './utils';
 
 export type ActionArgs = Record<string, string> & {
   appId: string;
@@ -32,7 +32,7 @@ const action = async (args: ActionArgs) => {
       installationId: authArgs.installationId,
     });
     info(JSON.stringify(token));
-    const octo = getAuthenticatedOctokit(authArgs);
+    const octo = getOctokit(token?.token || '');
 
     const projectFields = await octo.graphql<ProjectFieldsQueryResult>({
       query: `query getProjectFields($projectId: ID!) {
