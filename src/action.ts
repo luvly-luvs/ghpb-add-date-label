@@ -27,7 +27,7 @@ const action = async (args: ActionArgs) => {
 
     const projectFields = await graphql<ProjectFieldsQueryResult>({
       query: `query {
-        node(id: "$projectId") {
+        node(id: $projectId) {
           ... on ProjectNext {
             fields(first: 10) {
               nodes {
