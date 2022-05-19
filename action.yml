@@ -1,4 +1,4 @@
-name: 'action-template-typescript'
+name: 'ghpb-add-date-label'
 description: 'Github Actions Typescript Template'
 author: 'luvly-luvs'
 inputs:
