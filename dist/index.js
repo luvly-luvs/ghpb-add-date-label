@@ -44,8 +44,8 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
         const { projectId, fieldName } = args, authArgs = __rest(args, ["projectId", "fieldName"]);
         const { graphql } = (0, utils_1.getAuthenticatedOctokit)(authArgs);
         const projectFields = yield graphql({
-            query: `query {
-        node(id: "$projectId") {
+            query: `query getProjectFields($projectId: String!) {
+        node(id: $projectId) {
           ... on ProjectNext {
             fields(first: 10) {
               nodes {

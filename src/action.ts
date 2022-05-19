@@ -26,8 +26,8 @@ const action = async (args: ActionArgs) => {
     const { graphql } = getAuthenticatedOctokit(authArgs);
 
     const projectFields = await graphql<ProjectFieldsQueryResult>({
-      query: `query {
-        node(id: 1) {
+      query: `query getProjectFields($projectId: String!) {
+        node(id: $projectId) {
           ... on ProjectNext {
             fields(first: 10) {
               nodes {
@@ -39,6 +39,7 @@ const action = async (args: ActionArgs) => {
           }
         }
       }`,
+      projectId,
     });
 
     debug(JSON.stringify(projectFields));
