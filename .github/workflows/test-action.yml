@@ -5,8 +5,14 @@ jobs:
   test:
     name: 'Run Action'
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          token: ${{ secrets.SOME_TOKEN }}
+          appId: ${{ secrets.DATE_LABEL_APPID }}
+          installationId: ${{ secrets.DATE_LABEL_INSTALLID }}
+          privateKey: ${{ secrets.DATE_LABEL_PRIVATE_KEY }}
+          projectId: 1
+          fieldName: 'SomeField'
