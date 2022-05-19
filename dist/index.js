@@ -29,6 +29,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ActionErrors = void 0;
 const core_1 = __nccwpck_require__(2186);
+const auth_app_1 = __nccwpck_require__(7541);
 const utils_1 = __nccwpck_require__(918);
 var ActionErrors;
 (function (ActionErrors) {
@@ -42,8 +43,13 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
         const { projectId, fieldName } = args, authArgs = __rest(args, ["projectId", "fieldName"]);
+        const auth = (0, auth_app_1.createAppAuth)(authArgs);
+        const token = yield auth({
+            type: 'installation',
+            installationId: authArgs.installationId,
+        });
+        (0, core_1.debug)(JSON.stringify(token));
         const octo = (0, utils_1.getAuthenticatedOctokit)(authArgs);
-        console.log(octo);
         const projectFields = yield octo.graphql({
             query: `query getProjectFields($projectId: ID!) {
         node(id: $projectId) {
@@ -96,6 +102,8 @@ const action_1 = __importDefault(__nccwpck_require__(9139));
         const args = {
             appId: (0, core_1.getInput)('appId', { required: true }),
             installationId: (0, core_1.getInput)('installationId', { required: true }),
+            clientId: (0, core_1.getInput)('clientId', { required: true }),
+            clientSecret: (0, core_1.getInput)('clientSecret', { required: true }),
             privateKey: (0, core_1.getInput)('privateKey', { required: true }),
             projectId: (0, core_1.getInput)('projectId', { required: true }),
             fieldName: (0, core_1.getInput)('fieldName', { required: true }),
