@@ -1,5 +1,5 @@
 {
-  "name": "action-template-typescript",
+  "name": "ghpb-add-date-label",
   "version": "0.1.0",
   "private": true,
   "main": "lib/main.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luvly-luvs/action-template-typescript.git"
+    "url": "git+https://github.com/luvly-luvs/ghpb-add-date-label.git"
   },
   "dependencies": {
     "@actions/core": "^1.6.0",
