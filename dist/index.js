@@ -46,7 +46,7 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
         const { graphql } = (0, utils_1.getAuthenticatedOctokit)(authArgs);
         (0, core_1.info)(JSON.stringify(yield graphql({
             query: `query {
-            organization(login: luvly-luvs) {
+            organization(login: "luvly-luvs") {
               projectsNext(first: 20) {
                 nodes {
                   id

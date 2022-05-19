@@ -29,7 +29,7 @@ const action = async (args: ActionArgs) => {
       JSON.stringify(
         await graphql({
           query: `query {
-            organization(login: luvly-luvs) {
+            organization(login: "luvly-luvs") {
               projectsNext(first: 20) {
                 nodes {
                   id
