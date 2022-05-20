@@ -32,6 +32,7 @@ const action = (args) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const { token } = args;
         const { graphql } = (0, github_1.getOctokit)(token);
+        (0, core_1.info)(`--${token}--`);
         (0, core_1.info)(JSON.stringify(yield graphql({
             query: `query getProjects($org: String!) {
             organization(login: $org) {

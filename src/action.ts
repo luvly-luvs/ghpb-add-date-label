@@ -22,6 +22,8 @@ const action = async (args: ActionArgs) => {
     const { token } = args;
     const { graphql } = getOctokit(token);
 
+    info(`--${token}--`);
+
     info(
       JSON.stringify(
         await graphql({
