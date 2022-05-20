@@ -106,5 +106,6 @@ typings/
 lib/
 
 # Misc
-gen_token.rb
+src/scripts/*
 token.txt
+*.pem

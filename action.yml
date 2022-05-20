@@ -2,13 +2,16 @@ name: 'ghpb-add-date-label'
 description: 'Github Actions Typescript Template'
 author: 'luvly-luvs'
 inputs:
-  token:
+  client_id:
     required: true
-    description: 'Github App Token'
-  projectId:
+    description: 'Oauth App Client ID'
+  client_secret:
+    required: true
+    description: 'Oauth App Client Secret'
+  project_id:
     required: true
     description: 'Github Projects (Beta) Id'
-  fieldName:
+  field_name:
     required: true
     description: 'Github Projects (Beta) Field Name'
 

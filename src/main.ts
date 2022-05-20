@@ -3,13 +3,12 @@ import action from './action';
 
 (async () => {
   try {
-    const args = {
-      fieldName: getInput('fieldName', { required: true }),
-      projectId: getInput('projectId', { required: true }),
-      token: getInput('token', { required: true }),
-    };
+    const clientId = getInput('client_id', { required: true });
+    const clientSecret = getInput('client_secret', { required: true });
+    const fieldName = getInput('field_name', { required: true });
+    const projectId = getInput('project_id', { required: true });
 
-    await action(args);
+    await action({ clientId, clientSecret, fieldName, projectId });
   } catch (e: any) {
     setFailed(e?.message || e);
   }

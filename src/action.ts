@@ -1,8 +1,10 @@
 import { info, setFailed } from '@actions/core';
-import { getOctokit } from '@actions/github';
+import { createOAuthAppAuth } from '@octokit/auth-oauth-app';
+import { Octokit } from '@octokit/core';
 
-export type ActionArgs = Record<string, string> & {
-  token: string;
+export type ActionArgs = {
+  clientId: string;
+  clientSecret: string;
   projectId: string;
   fieldName: string;
 };
@@ -19,12 +21,13 @@ const action = async (args: ActionArgs) => {
       }
     }
 
-    const { token } = args;
-    const { graphql } = getOctokit(token);
-
-    graphql.defaults({
-      headers: {
-        authorization: `token ${token}`,
+    const { clientId, clientSecret } = args;
+    const { graphql } = new Octokit({
+      authStrategy: createOAuthAppAuth,
+      auth: {
+        clientType: 'oauth-app',
+        clientId,
+        clientSecret,
       },
     });
 
