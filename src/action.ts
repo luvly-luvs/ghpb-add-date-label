@@ -1,11 +1,8 @@
 import { info, setFailed } from '@actions/core';
-//import { ProjectFieldsQueryResult } from './types';
-import { getAuthenticatedOctokit } from './utils';
+import { getOctokit } from '@actions/github';
 
 export type ActionArgs = Record<string, string> & {
-  appId: string;
-  installationId: string;
-  privateKey: string;
+  token: string;
   projectId: string;
   fieldName: string;
 };
@@ -22,14 +19,14 @@ const action = async (args: ActionArgs) => {
       }
     }
 
-    const { projectId, fieldName, ...authArgs } = args;
-    const { graphql } = getAuthenticatedOctokit(authArgs);
+    const { token } = args;
+    const { graphql } = getOctokit(token);
 
     info(
       JSON.stringify(
         await graphql({
-          query: `query {
-            organization(login: "luvly-luvs") {
+          query: `query getProjects($org: String!) {
+            organization(login: $org) {
               projectsNext(first: 20) {
                 nodes {
                   id
@@ -38,31 +35,10 @@ const action = async (args: ActionArgs) => {
               }
             }
           }`,
-          headers: {
-            'GraphQL-Features': 'projects_next_graphql',
-          },
+          org: 'luvly-luvs',
         })
       )
     );
-
-    /*const projectFields = await graphql<ProjectFieldsQueryResult>({
-      query: `query getProjectFields($projectId: ID!) {
-        node(id: $projectId) {
-          ... on ProjectNext {
-            fields(first: 10) {
-              nodes {
-                id
-                name
-                settings
-              }
-            }
-          }
-        }
-      }`,
-      projectId,
-    });
-
-    info(JSON.stringify(projectFields));*/
   } catch (e: any) {
     setFailed(e?.message || e);
   }

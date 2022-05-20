@@ -2,15 +2,9 @@ name: 'ghpb-add-date-label'
 description: 'Github Actions Typescript Template'
 author: 'luvly-luvs'
 inputs:
-  appId:
+  token:
     required: true
-    description: 'Github AppId'
-  installationId:
-    required: true
-    description: 'Github App InstallationId'
-  privateKey:
-    required: true
-    description: 'Github App Private Key'
+    description: 'Github App Token'
   projectId:
     required: true
     description: 'Github Projects (Beta) Id'

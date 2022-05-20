@@ -8,11 +8,16 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1.5.0
         with:
           appId: ${{ secrets.DATE_LABEL_APPID }}
-          installationId: ${{ secrets.DATE_LABEL_INSTALLID }}
           privateKey: ${{ secrets.DATE_LABEL_PRIVATE_KEY }}
+      - uses: ./
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
           projectId: 1
           fieldName: 'SomeField'
