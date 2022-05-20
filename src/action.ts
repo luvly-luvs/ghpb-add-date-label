@@ -22,7 +22,11 @@ const action = async (args: ActionArgs) => {
     const { token } = args;
     const { graphql } = getOctokit(token);
 
-    info(`--${token}--`);
+    graphql.defaults({
+      headers: {
+        authorization: `token ${token}`,
+      },
+    });
 
     info(
       JSON.stringify(
