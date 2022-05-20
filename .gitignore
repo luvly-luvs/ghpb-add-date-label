@@ -104,3 +104,7 @@ typings/
 
 # Library Output
 lib/
+
+# Misc
+gen_token.rb
+token.txt
